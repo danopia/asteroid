@@ -46,30 +46,30 @@
 </template>
 
 <template name="objects">
-  <core-selector>
-    <paper-item path="hue:">Bookcase</paper-item>
-    <paper-item>Christmas lights</paper-item>
-    <paper-item>Behind the couch</paper-item>
-    <paper-item>Living room window</paper-item>
-    <paper-item>Receiver</paper-item>
-    <paper-item>TV</paper-item>
-    <paper-item>Projector</paper-item>
-    <paper-item>Hallway</paper-item>
-    <paper-item>Dan's table lamp</paper-item>
-    <paper-item>Dan's christmas lights</paper-item>
-    <paper-item>Dan's floor lamp</paper-item>
-    <paper-item>Dansound</paper-item>
-    <paper-item>Anthony's wall light</paper-item>
-    <paper-item>Anthony's floor lamp</paper-item>
-    <paper-item>Kitchen 1</paper-item>
-    <paper-item>Kitchen 2</paper-item>
-    <paper-item>Liquor cabinet</paper-item>
-    <paper-item>Tech shelf</paper-item>
-    <paper-item>Balcony</paper-item>
-    <paper-item>Sound board</paper-item>
-    <paper-item>Uplink</paper-item>
-    <paper-item>Wifi</paper-item>
-    <paper-item>Printer</paper-item>
+  <core-selector valueattr="path">
+    <paper-item path="hue:001788fffe10fa6f:1">Bookcase</paper-item>
+    <paper-item path="wemo::1">Christmas lights</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:2">Behind the couch</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:3">Living room window</paper-item>
+    <paper-item path="yamaha::">Receiver</paper-item>
+    <paper-item path="androidtv::">TV</paper-item>
+    <paper-item path="wemo::2">Projector</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:6">Hallway</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:8">Dan's table lamp</paper-item>
+    <paper-item path="wemo::3">Dan's christmas lights</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:5">Dan's floor lamp</paper-item>
+    <paper-item path="cast::">Dansound</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:4">Anthony's wall light</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:12">Anthony's floor lamp</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:9">Kitchen 1</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:13">Kitchen 2</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:10">Liquor cabinet</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:7">Tech shelf</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:11">Balcony</paper-item>
+    <paper-item path="pulse::">Sound board</paper-item>
+    <paper-item path="modem::">Uplink</paper-item>
+    <paper-item path="ddwrt::">Wifi</paper-item>
+    <paper-item path="gcp::">Printer</paper-item>
   </core-selector>
 </template>
 
@@ -91,16 +91,20 @@
     <paper-icon-button icon="unfold-less"></paper-icon-button>
     <span flex>Controls</span>
   </core-toolbar>
+  {{> Template.dynamic template=template}}
+</template>
+
+<template name="huePanel">
   <div center horizontal layout style="padding: 10px;">
-    <label>Red:</label>
-    <paper-slider id="red" flex min="0" max="255" value="175"></paper-slider>
+    <label>Hue</label>
+    <paper-slider id="hue" flex min="0" max="65535" value="{{state.hue}}"></paper-slider>
   </div>
   <div center horizontal layout style="padding: 10px;">
-    <label>Green:</label>
-    <paper-slider id="green" flex min="0" max="255" value="100"></paper-slider>
+    <label>Saturation</label>
+    <paper-slider id="sat" flex min="0" max="255" value="{{state.sat}}"></paper-slider>
   </div>
   <div center horizontal layout style="padding: 10px;">
-    <label>Blue:</label>
-    <paper-slider id="red" flex min="0" max="255" value="150"></paper-slider>
+    <label>Brightness</label>
+    <paper-slider id="bri" flex min="0" max="254" value="{{state.bri}}"></paper-slider>
   </div>
 </template>
