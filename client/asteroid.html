@@ -47,25 +47,25 @@
 
 <template name="objects">
   <core-selector valueattr="path">
-    <paper-item path="hue:001788fffe10fa6f:1">Bookcase</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:1"><img src="//i.imgur.com/E8iF1FS.png">Bookcase</paper-item>
     <paper-item path="wemo::1">Christmas lights</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:2">Behind the couch</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:3">Living room window</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:2"><img src="//i.imgur.com/E8iF1FS.png">Behind the couch</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:3"><img src="//i.imgur.com/E8iF1FS.png">Living room window</paper-item>
     <paper-item path="yamaha::">Receiver</paper-item>
     <paper-item path="androidtv::">TV</paper-item>
     <paper-item path="wemo::2">Projector</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:6">Hallway</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:8">Dan's table lamp</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:6"><img src="//i.imgur.com/E8iF1FS.png">Hallway</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:8"><img src="//i.imgur.com/E8iF1FS.png">Dan's table lamp</paper-item>
     <paper-item path="wemo::3">Dan's christmas lights</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:5">Dan's floor lamp</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:5"><img src="//i.imgur.com/E8iF1FS.png">Dan's floor lamp</paper-item>
     <paper-item path="cast::">Dansound</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:4">Anthony's wall light</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:12">Anthony's floor lamp</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:9">Kitchen 1</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:13">Kitchen 2</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:10">Liquor cabinet</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:7">Tech shelf</paper-item>
-    <paper-item path="hue:001788fffe10fa6f:11">Balcony</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:4"><img src="//i.imgur.com/E8iF1FS.png">Anthony's wall light</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:12"><img src="//i.imgur.com/E8iF1FS.png">Anthony's floor lamp</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:9"><img src="//i.imgur.com/E8iF1FS.png">Kitchen 1</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:13"><img src="//i.imgur.com/E8iF1FS.png">Kitchen 2</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:10"><img src="//i.imgur.com/E8iF1FS.png">Liquor cabinet</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:7"><img src="//i.imgur.com/E8iF1FS.png">Tech shelf</paper-item>
+    <paper-item path="hue:001788fffe10fa6f:11"><img src="//i.imgur.com/E8iF1FS.png">Balcony</paper-item>
     <paper-item path="pulse::">Sound board</paper-item>
     <paper-item path="modem::">Uplink</paper-item>
     <paper-item path="ddwrt::">Wifi</paper-item>
@@ -91,7 +91,9 @@
     <paper-icon-button icon="unfold-less"></paper-icon-button>
     <span flex>Controls</span>
   </core-toolbar>
-  {{> Template.dynamic template=template}}
+  <div style="margin: 15px 0;">
+    {{> Template.dynamic template=template}}
+  </div>
 </template>
 
 <template name="huePanel">
