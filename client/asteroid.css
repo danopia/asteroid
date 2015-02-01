@@ -1,1 +1,19 @@
-/* CSS declarations go here */
+body {
+  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+  margin: 0;
+  padding: 0;
+  background: #333;
+  background: url('http://i.dailymail.co.uk/i/pix/2011/07/04/article-2011055-0CDBF56400000578-6_964x636.jpg');
+  background-size: cover;
+}
+
+core-toolbar {
+  color: #f1f1f1;
+  fill: #f1f1f1;
+}
+
+.root {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #f7f7f7;
+}
