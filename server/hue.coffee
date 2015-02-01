@@ -12,7 +12,6 @@ Meteor.startup ->
     interval = Meteor.setInterval ->
       userResponse = HTTP.post "http://#{bridge.internalipaddress}/api", data:
         devicetype: "asteroid##{Npm.require('os').hostname()}"
-      console.log userResponse.data
 
       if userResponse.data[0].success
         Meteor.clearInterval interval
