@@ -16,4 +16,9 @@ core-toolbar {
   max-width: 700px;
   margin: 0 auto;
   background: #f7f7f7;
+
+}
+
+paper-item {
+  border-bottom: 1px solid #d7d7d7;
 }

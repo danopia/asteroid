@@ -1,2 +1,4 @@
-global.Devices = new Mongo.Collection 'devices'
-global.Contexts = new Mongo.Collection 'contexts'
+root = global ? window
+
+root.Devices = new Mongo.Collection 'devices'
+root.Contexts = new Mongo.Collection 'contexts'

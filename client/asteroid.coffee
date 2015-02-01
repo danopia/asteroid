@@ -1,4 +1,7 @@
-Session.set 'counter', 0
+Session.setDefault 'light', -1
+
+Meteor.call 'getLights', (err, lights) ->
+  Session.get
 
 Template.hello.helpers
   counter: ->
