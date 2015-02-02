@@ -18,6 +18,7 @@ Meteor.startup ->
         console.log 'Paired to Hue bridge'
 
         bridge.secret = userResponse.data[0].success.username
+        bridge.url = "http://#{bridge.internalipaddress}/api/#{bridge.secret}"
         bridge.module = 'hue'
         Devices.upsert { id: bridge.id }, $set: bridge
     , 5000
