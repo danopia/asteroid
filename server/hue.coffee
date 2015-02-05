@@ -6,9 +6,22 @@ Meteor.startup ->
     device = Devices.findOne module: 'hue', id: bridge.id
     if device
       console.log 'Found Hue pairing'
+
+      for index, light of HTTP.get("#{device.url}/lights").data
+        path = "hue:#{device.id}:#{index}"
+        Objects.upsert { path },
+          module: 'hue'
+          device: "hue:#{device.id}"
+          path: path
+          id: index
+
+          type: light.type
+          name: light.name
+          sku: light.modelid
+          uid: light.uniqueid
       return
 
-    console.log 'Press the pairing button on your Hue bridge, called', bridge.name
+    console.log 'Press the pairing button on your Hue bridge named', bridge.name
     interval = Meteor.setInterval ->
       userResponse = HTTP.post "http://#{bridge.internalipaddress}/api", data:
         devicetype: "asteroid##{Npm.require('os').hostname()}"
@@ -20,7 +33,7 @@ Meteor.startup ->
         bridge.secret = userResponse.data[0].success.username
         bridge.url = "http://#{bridge.internalipaddress}/api/#{bridge.secret}"
         bridge.module = 'hue'
-        Devices.upsert { id: bridge.id }, $set: bridge
+        Devices.upsert { module: 'hue', id: bridge.id }, $set: bridge
     , 5000
 
 Meteor.methods
