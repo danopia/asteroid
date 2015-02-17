@@ -100,11 +100,22 @@
     <span flex>Schedule</span>
   </core-toolbar>
   <div>
-    
+
   </div>
 </template>
 
 <template name="huePanel">
+  <style>
+    #hue::shadow #sliderKnobInner {
+      background-color: {{rgb 'hue'}};
+    }
+    #sat::shadow #sliderKnobInner {
+      background-color: {{rgb 'sat'}};
+    }
+    #bri::shadow #sliderKnobInner {
+      background-color: {{rgb 'bri'}};
+    }
+  </style>
   <div center horizontal layout style="padding: 10px;">
     <label>Hue</label>
     <paper-slider id="hue" flex min="0" max="65535" value="{{state.hue}}"></paper-slider>

@@ -14,6 +14,9 @@ Template.huePanel.rendered = ->
 
 Template.huePanel.helpers
   state: -> Session.get 'state'
+  rgb: (focus)->
+    state = Session.get 'state'
+    "hsla(#{Math.round(state.hue * 360 / 65535)}, #{if focus is 'sat' then state.sat else 100}%, #{if focus is 'bri' then state.bri/2 else 50}%, 1)"
 
 Template.huePanel.events
   'change paper-slider': (evt) ->
