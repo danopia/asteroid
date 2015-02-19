@@ -58,19 +58,10 @@ Meteor.methods
     if device.module is 'hue'
       HTTP.get("#{device.url}/lights/#{parts[2]}").data
 
-  'get state': (path) ->
-    parts = path.split ':'
-    device = Devices.findOne module: parts[0], id: parts[1]
-    return [] unless device
+  'get state/hue': (device, object) ->
+    device = Devices.findOne module: 'hue', id: device
+    HTTP.get("#{device.url}/lights/#{object}").data.state if device
 
-    if device.module is 'hue'
-      HTTP.get("#{device.url}/lights/#{parts[2]}").data.state
-
-  'set state': (path, state) ->
-    parts = path.split ':'
-    device = Devices.findOne module: parts[0], id: parts[1]
-    return [] unless device
-    @unblock()
-
-    if device.module is 'hue'
-      HTTP.put("#{device.url}/lights/#{parts[2]}/state", data: state).data
+  'set state/hue': (device, object, state) ->
+    device = Devices.findOne module: 'hue', id: device
+    HTTP.put("#{device.url}/lights/#{object}/state", data: state).data if device

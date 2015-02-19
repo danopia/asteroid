@@ -14,7 +14,8 @@ Template.panel.events
 Template.huePanel.rendered = ->
   @autorun ->
     if Session.get 'object'
-      Meteor.call 'get state', Session.get('object'), (err, state) ->
+      parts = Session.get('object').split(':')
+      Meteor.call "get state/#{parts[0]}", parts[1], parts[2], (err, state) ->
         state.bri = 0 unless state.on
         Session.set 'state', state
 
@@ -34,7 +35,26 @@ Template.huePanel.events
     state.on = state.bri > 0
 
     Session.set 'state', state
-    Meteor.call 'set state', Session.get('object'), state
+    parts = Session.get('object').split(':')
+    Meteor.call "set state/#{parts[0]}", parts[1], parts[2], state
+
+Template.wemoPanel.rendered = ->
+  @autorun ->
+    if Session.get 'object'
+      parts = Session.get('object').split(':')
+      Meteor.call "get state/#{parts[0]}", parts[1], parts[2], (err, state) ->
+        Session.set 'state', state
+
+Template.wemoPanel.helpers
+  stateAttrs: ->
+    checked: 'checked' if Session.get 'state'
+
+Template.wemoPanel.events
+  'change input': (evt) ->
+    state  = $(evt.target).is(':checked')
+    Session.set 'state', state
+    parts = Session.get('object').split(':')
+    Meteor.call "set state/#{parts[0]}", parts[1], parts[2], state
 
 Template.objects.events
   'core-activate core-selector': (evt) ->

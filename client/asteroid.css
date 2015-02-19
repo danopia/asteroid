@@ -27,3 +27,65 @@ paper-item img {
   height: 24px;
   margin: 5px 10px;
 }
+
+
+input#private {
+    display: none;
+}
+
+input#private + label {
+    cursor: pointer;
+    line-height: 1.5em;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 200%;
+}
+
+div#private-toggle {
+    background-color: #ddd;
+    color: #999;
+    border-radius: 8px;
+    width: 290px;
+}
+
+#private-toggle,
+#private-toggle div,
+#private-toggle span {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+
+#private-toggle span {
+    width: 140px;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+#private-toggle span:first {
+    border-right: 1px solid #888;
+}
+
+#private-toggle div {
+    -moz-transition: all 250ms;
+    -ms-transition: all 250ms;
+    -o-transition: all 250ms;
+    -webkit-transition: all 250ms;
+    background-color: darkred;
+    border-radius: 8px 0px 0px 8px;
+    box-shadow: 0px 0px 4px red;
+    height: 1.5em;
+    position: absolute;
+    transition: all 250ms;
+    width: 145px;
+    z-index: 1;
+    margin-left: -6px;
+}
+
+input#private:checked + label > div > div {
+    background-color: darkgreen;
+    border-radius: 0px 8px 8px 0px;
+    box-shadow: 0px 0px 4px lightgreen;
+    margin-left: 145px;
+}

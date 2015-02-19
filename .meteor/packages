@@ -8,3 +8,7 @@ momentjs:moment
 ecwyne:polymer-elements
 gandev:server-eval
 http
+meteorhacks:npm
+
+
+npm-container
