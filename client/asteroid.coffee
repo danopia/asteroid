@@ -5,11 +5,15 @@ Template.panel.helpers
   template: -> if Session.get('object')
     Session.get('object').split(':')[0] + 'Panel'
 
+collapses = ['controlCollapse', 'presetCollapse', 'scheduleCollapse']
 Template.panel.events
   'click core-toolbar': (evt) ->
     target = $(evt.currentTarget).data('target')
     collapse = $('#' + target)[0]
     collapse.toggle()
+
+    collapses.forEach (id) ->
+      $('#' + id)[0].opened = false unless id is target
 
 Template.huePanel.rendered = ->
   @autorun ->
