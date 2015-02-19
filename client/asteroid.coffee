@@ -64,3 +64,17 @@ Template.objects.events
   'core-activate core-selector': (evt) ->
     Session.set 'object', evt.target.selected
     Session.set 'state', {}
+
+Template.contexts.events
+  'core-activate core-selector': (evt) ->
+    Session.set 'objects', evt.target.selected.split(';')
+    Session.set 'object', null
+    Session.set 'state', {}
+
+Session.setDefault 'objects', []
+Template.objects.rendered = ->
+  @autorun ->
+    if Session.get('objects').length is 0 then return
+    $('[flag=obj] paper-item').hide()
+    Session.get('objects').forEach (obj) ->
+      $('[path="' + obj + '"]').show()
