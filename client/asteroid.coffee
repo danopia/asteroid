@@ -1,9 +1,15 @@
 #Meteor.call 'getLights', (err, lights) ->
 #  Session.get
 
+Session.setDefault 'objects', []
+Session.setDefault 'state', {}
+
 Template.panel.helpers
-  template: -> if Session.get('object')
-    Session.get('object').split(':')[0] + 'Panel'
+  template: ->
+    if Session.get('object')
+      Session.get('object').split(':')[0] + 'Panel'
+    else if Session.get('objects')
+      'huePanel'
 
 collapses = ['controlCollapse', 'presetCollapse', 'scheduleCollapse']
 Template.panel.events
@@ -19,6 +25,11 @@ Template.huePanel.rendered = ->
   @autorun ->
     if Session.get 'object'
       parts = Session.get('object').split(':')
+      Meteor.call "get state/#{parts[0]}", parts[1], parts[2], (err, state) ->
+        state.bri = 0 unless state.on
+        Session.set 'state', state
+    else if Session.get('objects') && Session.get('objects').length
+      parts = Session.get('objects')[0].split(':')
       Meteor.call "get state/#{parts[0]}", parts[1], parts[2], (err, state) ->
         state.bri = 0 unless state.on
         Session.set 'state', state
@@ -39,8 +50,14 @@ Template.huePanel.events
     state.on = state.bri > 0
 
     Session.set 'state', state
-    parts = Session.get('object').split(':')
-    Meteor.call "set state/#{parts[0]}", parts[1], parts[2], state
+
+    if Session.get('object')
+      parts = Session.get('object').split(':')
+      Meteor.call "set state/#{parts[0]}", parts[1], parts[2], state
+    else if Session.get('objects').length
+      Session.get('objects').forEach (o) ->
+        parts = o.split(':')
+        Meteor.call "set state/#{parts[0]}", parts[1], parts[2], state
 
 Template.wemoPanel.rendered = ->
   @autorun ->
@@ -71,7 +88,6 @@ Template.contexts.events
     Session.set 'object', null
     Session.set 'state', {}
 
-Session.setDefault 'objects', []
 Template.objects.rendered = ->
   @autorun ->
     if Session.get('objects').length is 0 then return
