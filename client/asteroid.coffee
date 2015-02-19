@@ -5,6 +5,12 @@ Template.panel.helpers
   template: -> if Session.get('object')
     Session.get('object').split(':')[0] + 'Panel'
 
+Template.panel.events
+  'click core-toolbar': (evt) ->
+    target = $(evt.currentTarget).data('target')
+    collapse = $('#' + target)[0]
+    collapse.toggle()
+
 Template.huePanel.rendered = ->
   @autorun ->
     if Session.get 'object'
