@@ -28,19 +28,28 @@ Template.huePanel.rendered = ->
       Meteor.call "get state/#{parts[0]}", parts[1], parts[2], (err, state) ->
         state.bri = 0 unless state.on
         Session.set 'state', state
+        Session.set 'actualState', state
     else if Session.get('objects') && Session.get('objects').length
       parts = Session.get('objects')[0].split(':')
       Meteor.call "get state/#{parts[0]}", parts[1], parts[2], (err, state) ->
         state.bri = 0 unless state.on
         Session.set 'state', state
+        Session.set 'actualState', state
 
 Template.huePanel.helpers
   state: -> Session.get 'state'
+  actualState: -> Session.get 'actualState'
   rgb: (focus) ->
     state = Session.get 'state'
     "hsla(#{Math.round(state.hue * 360 / 65535)}, #{if focus is 'sat' then state.sat else 100}%, #{if focus is 'bri' then state.bri/2 else 50}%, 1)"
 
 Template.huePanel.events
+  'immediate-value-change paper-slider': (evt) ->
+    target = evt.target
+    currentState = Session.get 'state'
+    currentState[target.id] = target.immediateValue
+    Session.set 'state', currentState
+
   'change paper-slider': (evt) ->
     state =
       hue: $('#hue')[0].value
@@ -49,6 +58,7 @@ Template.huePanel.events
       colormore: 'hs'
     state.on = state.bri > 0
 
+<<<<<<< HEAD
     Session.set 'state', state
 
     if Session.get('object')
@@ -58,6 +68,11 @@ Template.huePanel.events
       Session.get('objects').forEach (o) ->
         parts = o.split(':')
         Meteor.call "set state/#{parts[0]}", parts[1], parts[2], state
+=======
+    Session.set 'actualState', state
+    parts = Session.get('object').split(':')
+    Meteor.call "set state/#{parts[0]}", parts[1], parts[2], state
+>>>>>>> origin/master
 
 Template.wemoPanel.rendered = ->
   @autorun ->
