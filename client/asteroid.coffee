@@ -58,8 +58,8 @@ Template.huePanel.events
       colormore: 'hs'
     state.on = state.bri > 0
 
-<<<<<<< HEAD
     Session.set 'state', state
+    Session.set 'actualState', state
 
     if Session.get('object')
       parts = Session.get('object').split(':')
@@ -68,11 +68,6 @@ Template.huePanel.events
       Session.get('objects').forEach (o) ->
         parts = o.split(':')
         Meteor.call "set state/#{parts[0]}", parts[1], parts[2], state
-=======
-    Session.set 'actualState', state
-    parts = Session.get('object').split(':')
-    Meteor.call "set state/#{parts[0]}", parts[1], parts[2], state
->>>>>>> origin/master
 
 Template.wemoPanel.rendered = ->
   @autorun ->
