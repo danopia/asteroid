@@ -23,11 +23,11 @@
 <body>
   <paper-shadow z="5" fit vertical layout class="root">
     {{> toolbar}}
-    <div flex horizontal layout>
-      <div flex vertical layout style="overflow: auto;">
+    <div flex horizontal layout style="overflow-y: hidden;">
+      <div flex vertical layout style="overflow: scroll;">
         {{> objects}}
       </div>
-      <div flex vertical layout style="overflow: auto; border-left: 1px solid gray;">
+      <div flex vertical layout style="overflow: scroll; border-left: 1px solid gray;">
         {{> contexts}}
       </div>
     </div>
